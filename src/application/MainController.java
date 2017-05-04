@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 
 public class MainController {
@@ -67,6 +68,17 @@ public class MainController {
             tfKeyStorePath.setText(file.getAbsolutePath());
 		}
     }
+
+    /**
+     * 输入签名秘钥密码
+     * @param event
+     */
+    @FXML
+    private void onKeyStorePwdEnd(KeyEvent event){
+    	String msg = String.format("onKeyStorePwdEnd %s\n", pfKeyStorePwd.getText());
+        System.err.printf(msg);
+    }
+
 
     /**
      * 选择秘钥签名文件

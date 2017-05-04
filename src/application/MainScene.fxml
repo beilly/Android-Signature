@@ -19,7 +19,7 @@
       <Text layoutX="21.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="选择别名：" />
       <Button id="btn_go" layoutX="228.0" layoutY="370.0" mnemonicParsing="false" onAction="#onGotoSignature" text="开始签名" />
       <Label id="tv_title" fx:id="tvTitle" layoutX="211.0" layoutY="28.0" text="Android 签名系统" />
-      <PasswordField id="tf_keystore_pwd" fx:id="pfKeyStorePwd" layoutX="80.0" layoutY="142.0" prefHeight="23.0" prefWidth="404.0" promptText="请输入签名密码" />
+      <PasswordField id="tf_keystore_pwd" fx:id="pfKeyStorePwd" layoutX="80.0" layoutY="142.0" onKeyReleased="#onKeyStorePwdEnd" prefHeight="23.0" prefWidth="404.0" promptText="请输入签名密码" />
       <PasswordField id="tf_alias_pwd" fx:id="pfAliasPwd" layoutX="80.0" layoutY="206.0" prefHeight="23.0" prefWidth="404.0" promptText="请输入别名密码" />
       <Button id="btn_apk" layoutX="459.0" layoutY="72.0" mnemonicParsing="false" onAction="#onChooseApk" text="..." />
       <Button id="btn_keystore" layoutX="459.0" layoutY="107.0" mnemonicParsing="false" onAction="#onChooseKeyStore" text="..." />

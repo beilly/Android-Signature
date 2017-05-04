@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
@@ -29,6 +30,9 @@ public class MainController {
 
     @FXML
     ChoiceBox<String> cbAlias;
+
+    @FXML
+    TextArea taResult;
 
     /**
      * 选择apk文件
@@ -70,7 +74,12 @@ public class MainController {
      */
     @FXML
     private void onGotoSignature(ActionEvent event){
-        System.err.printf("onGotoSignature %s\n", event);
+    	String msg = String.format("onGotoSignature %s\n", event);
+        System.err.printf(msg);
+        taResult.clear();
+        for (int i = 0; i < 10; i++) {
+        	taResult.appendText(msg);
+		}
     }
 
 

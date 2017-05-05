@@ -1,6 +1,10 @@
 package application;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 
 import com.android.apksigner.ApkSignerTool;
 
@@ -92,21 +96,56 @@ public class MainController {
 	@FXML
 	private void onGotoSignature(ActionEvent event) {
 		String msg = String.format("onGotoSignature %s\n", event);
-		System.err.printf(msg);
+		System.out.printf(msg);
+
 		taResult.clear();
 		try {
 			String[] cmd = { "--ks=" + tfKeyStorePath.getText(),
-//					"--ks-key-alias=appABook",
-					"--ks-pass=pass:" + pfKeyStorePwd.getText(),
-					"--key-pass=pass:" + pfAliasPwd.getText(),
-					"--in=" + tfApkPath.getText(),
+					// "--ks-key-alias=appABook",
+					"--ks-pass=pass:" + pfKeyStorePwd.getText(), "--key-pass=pass:" + pfAliasPwd.getText(),
+					"--v2-signing-enabled=true", "--in=" + tfApkPath.getText(),
 					"--out=asset\\sign_" + System.currentTimeMillis() + ".apk" };
+			System.setErr(new PrintStream(new MyOutputStream(taResult)));
+			taResult.appendText("开始签名\n");
+
+
 			ApkSignerTool.sign(cmd);
 
-			taResult.setText("签名成功");
+			taResult.appendText("签名成功\n");
+
+
 		} catch (Exception e) {
-			taResult.setText(e.getMessage());
+			taResult.appendText(e.getMessage());
+		} finally{
+			System.setErr(System.err);
 		}
+
 	}
 
+}
+
+class MyOutputStream extends OutputStream {
+
+	TextArea txtLog;
+
+	public MyOutputStream(TextArea txtLog) {
+		this.txtLog = txtLog;
+	}
+
+	public void write(int arg0) throws IOException {
+		// 写入指定的字节，忽略
+	}
+
+	public void write(byte data[]) throws IOException {
+		// 追加一行字符串
+		txtLog.appendText(new String(data));
+	}
+
+	public void write(byte data[], int off, int len) throws IOException {
+		TextArea txtLog = this.txtLog;
+		// 追加一行字符串中指定的部分，这个最重要
+		txtLog.appendText(new String(data, off, len));
+		// 移动TextArea的光标到最后，实现自动滚动
+		txtLog.positionCaret(txtLog.getText().length());
+	}
 }

@@ -15,7 +15,6 @@
       <TextField id="tf_keystore_path" fx:id="tfKeyStorePath" layoutX="80.0" layoutY="107.0" prefHeight="23.0" prefWidth="374.0" promptText="请输入或者选择签名文件路径" text="D:\distro-workspace\Android-Signature\config\abook.jks" />
       <Text layoutX="21.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="签名密码：" />
       <Text layoutX="21.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="别名密码：" />
-      <ChoiceBox id="cb_alias" fx:id="cbAlias" layoutX="80.0" layoutY="174.0" prefWidth="150.0" />
       <Text layoutX="21.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="选择别名：" />
       <Button id="btn_go" layoutX="228.0" layoutY="370.0" mnemonicParsing="false" onAction="#onGotoSignature" text="开始签名" />
       <Label id="tv_title" fx:id="tvTitle" layoutX="211.0" layoutY="28.0" text="Android 签名系统" />
@@ -24,5 +23,6 @@
       <Button id="btn_apk" layoutX="459.0" layoutY="72.0" mnemonicParsing="false" onAction="#onChooseApk" text="..." />
       <Button id="btn_keystore" layoutX="459.0" layoutY="107.0" mnemonicParsing="false" onAction="#onChooseKeyStore" text="..." />
       <TextArea fx:id="taResult" editable="false" layoutX="20.0" layoutY="246.0" prefHeight="108.0" prefWidth="464.0" wrapText="true" />
+      <TextField id="tf_alias" fx:id="tfAlias" layoutX="80.0" layoutY="174.0" prefHeight="23.0" prefWidth="404.0" promptText="请输入别名" text="appABook" />
    </children>
 </AnchorPane>

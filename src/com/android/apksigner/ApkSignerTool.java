@@ -254,16 +254,13 @@ public class ApkSignerTool {
                 try {
                     signer.loadPrivateKeyAndCerts(passwordRetriever);
                 } catch (ParameterException e) {
-                    System.err.println(
+                    throw new RuntimeException(
                             "Failed to load signer \"" + signer.name + "\": "
                                     + e.getMessage());
-                    System.exit(2);
-                    return;
                 } catch (Exception e) {
-                    System.err.println("Failed to load signer \"" + signer.name + "\"");
-                    e.printStackTrace();
-                    System.exit(2);
-                    return;
+                    throw new RuntimeException(
+                    		"Failed to load signer \"" + signer.name + "\": "
+                    				+ e.getMessage());
                 }
                 String v1SigBasename;
                 if (signer.v1SigFileBasename != null) {

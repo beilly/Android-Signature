@@ -1,7 +1,6 @@
 package application;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -10,7 +9,6 @@ import com.android.apksigner.ApkSignerTool;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
@@ -35,7 +33,7 @@ public class MainController {
 	PasswordField pfAliasPwd;
 
 	@FXML
-	ChoiceBox<String> cbAlias;
+	TextField tfAlias;
 
 	@FXML
 	TextArea taResult;
@@ -85,7 +83,7 @@ public class MainController {
 	@FXML
 	private void onKeyStorePwdEnd(KeyEvent event) {
 		String msg = String.format("onKeyStorePwdEnd %s\n", pfKeyStorePwd.getText());
-		System.err.printf(msg);
+		System.out.printf(msg);
 	}
 
 	/**
@@ -100,23 +98,20 @@ public class MainController {
 
 		taResult.clear();
 		try {
-			String[] cmd = { "--ks=" + tfKeyStorePath.getText(),
-					// "--ks-key-alias=appABook",
+			String[] cmd = { "--ks=" + tfKeyStorePath.getText(), "--ks-key-alias=" + tfAlias.getText(),
 					"--ks-pass=pass:" + pfKeyStorePwd.getText(), "--key-pass=pass:" + pfAliasPwd.getText(),
 					"--v2-signing-enabled=true", "--in=" + tfApkPath.getText(),
 					"--out=asset\\sign_" + System.currentTimeMillis() + ".apk" };
 			System.setErr(new PrintStream(new MyOutputStream(taResult)));
-			taResult.appendText("开始签名\n");
-
+			taResult.appendText("开始签名...\n");
 
 			ApkSignerTool.sign(cmd);
 
 			taResult.appendText("签名成功\n");
 
-
 		} catch (Exception e) {
 			taResult.appendText(e.getMessage());
-		} finally{
+		} finally {
 			System.setErr(System.err);
 		}
 
